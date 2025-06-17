@@ -46,4 +46,4 @@ yarn-error.log*
 .idea
 
 # dev db
-./txt-me-later.db
+txt-me-later.db
