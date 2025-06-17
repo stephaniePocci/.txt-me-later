@@ -7,7 +7,6 @@ const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    NODE_ENV: z.enum(["development", "test", "production"]),
     DATABASE_URL: z.url(),
     PAYLOAD_SECRET: z.string(),
   },
