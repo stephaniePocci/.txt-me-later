@@ -1,0 +1,11 @@
+# Example in docker-compose.yml
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app # Mount your local code into the container
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
