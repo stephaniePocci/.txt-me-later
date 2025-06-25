@@ -1,36 +1,76 @@
-import Link from "next/link";
+"use client";
+import { useState } from "react";
+
+// Importing the necessary components
+import ComicsTab from "./tabs/ComicsTab";
+import HobbiesTab from "./tabs/HobbiesTab";
+import PicturesTab from "./tabs/PicturesTab";
+import ReviewsTab from "./tabs/ReviewsTab";
+import TechTab from "./tabs/TechTab";
+
+const tabs = [
+  { key: "tech", label: "/tech" },
+  { key: "hobbies", label: "/hobbies" },
+  { key: "reviews", label: "/reviews" },
+  { key: "pictures", label: "/pictures" },
+  { key: "comics", label: "/comics" },
+];
 
 export default function HomePage() {
+  const [activeTab, setActiveTab] = useState("tech");
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "tech":
+        return <TechTab />;
+      case "hobbies":
+        return <HobbiesTab />;
+      case "reviews":
+        return <ReviewsTab />;
+      case "pictures":
+        return <PicturesTab />;
+      case "comics":
+        return <ComicsTab />;
+      default:
+        return <p>Welcome to .txt me later!</p>;
+    }
+  };
+
+  // Main component rendering
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-        <h1>test</h1>
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+    <main className="min-h-screen bg-gradient-to-b from-[#672abd] to-[#25174b] px-4 pt-10 text-[#f4f4f8ee]">
+      {/* Header */}
+      <div className="flex flex-col items-center justify-start pb-7">
+        <h1 className="text-5xl font-bold">.txt me later</h1>
+        <p className="mt-2 text-lg">
+          A newsletter of stuff we'd text you anyway.
+        </p>
+      </div>
+
+      <div className="mx-auto w-full max-w-4xl">
+        {/* Tab Bar */}
+        <div className="flex space-x-2 border-b border-black text-black">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => {
+                setActiveTab(tab.key);
+                console.log(`Switched to ${tab.key} tab`);
+              }}
+              className={`rounded-t-md border border-b-0 border-black px-4 py-1 text-sm font-semibold transition ${
+                activeTab === tab.key
+                  ? "bg-[#c1a4c7]"
+                  : "bg-[#e0cce7] hover:bg-[#d4bfe0]"
+              }`}
+            >
+              {tab.label.toUpperCase()}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content Area */}
+        <div className="border border-t-0 border-black bg-[#c1a4c7] px-4 py-6">
+          {renderContent()}
         </div>
       </div>
     </main>
