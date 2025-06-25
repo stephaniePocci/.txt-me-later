@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 // Importing the necessary components
@@ -47,9 +48,9 @@ export default function HomePage() {
         </p>
       </div>
 
-      <div className="mx-auto w-full max-w-4xl">
+      <div className="mx-auto mt-8 w-full max-w-4xl rounded-md shadow-lg">
         {/* Tab Bar */}
-        <div className="flex space-x-2 border-b border-black text-black">
+        <div className="flex flex-wrap space-x-2 border-b border-black text-black">
           {tabs.map((tab) => (
             <button
               key={tab.key}
@@ -73,6 +74,13 @@ export default function HomePage() {
           {renderContent()}
         </div>
       </div>
+
+      {/* Floating Submission Button */}
+      <Link href="/submit">
+        <div className="fixed right-4 bottom-6 rounded-full bg-[#83a4dc] px-4 text-[#0c378a] shadow-lg transition hover:bg-blue-700">
+          Submit a Post
+        </div>
+      </Link>
     </main>
   );
 }
